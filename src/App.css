@@ -1,0 +1,19 @@
+.custom-audio-player {
+  width: 100% !important;
+  border-radius: 8px;
+  background-color: #ffffff00; /* White background for the audio player controls */
+  padding: 4px;
+}
+
+.custom-audio-player::-webkit-media-controls-panel {
+  background-color: #9b27b0a1 !important; /* Purple background for controls */
+}
+
+.custom-audio-player::-webkit-media-controls-play-button,
+.custom-audio-player::-webkit-media-controls-volume-slider {
+  color: #ffffff !important; /* White color for play button and volume slider */
+}
+
+.custom-audio-player::-webkit-media-controls-mute-button {
+  color: #ffffff !important; /* White color for mute button */
+}
