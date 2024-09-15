@@ -98,6 +98,7 @@ function Comments({ commentData }) {
                         <img
                           src={comment.attachImg}
                           alt="Attached"
+                          draggable="false"
                           style={styles.img}
                         />
                       )}

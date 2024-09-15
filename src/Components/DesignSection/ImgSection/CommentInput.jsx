@@ -21,6 +21,14 @@ function CommentInput({
   getTextFieldLabel,
   styles,
 }) {
+  // Handle the key press event
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault(); // Prevent default behavior (like submitting a form if inside one)
+      handleCommentSubmit(index); // Call the comment submit function
+    }
+  };
+
   return (
     <Box sx={styles.TextFieldButtonBox}>
       {/* TextField component for user input with label and end adornments */}
@@ -28,6 +36,7 @@ function CommentInput({
         label={getTextFieldLabel()}
         value={newComment}
         onChange={(e) => setNewComment(e.target.value)}
+        onKeyDown={handleKeyDown} // Add onKeyDown handler here
         size="small"
         sx={styles.textField}
         InputLabelProps={{

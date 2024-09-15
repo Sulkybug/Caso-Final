@@ -5,6 +5,7 @@ import {
   Button,
   Slider,
   IconButton,
+  Tooltip, // Import Tooltip
   Dialog,
   DialogContent,
 } from "@mui/material";
@@ -126,27 +127,33 @@ function ControlsSection({ onCommentButtonClick, isCommenting }) {
           width: "40%",
         }}
       >
-        <IconButton
-          sx={{
-            borderRadius: "20px",
-            fontSize: "30px",
-          }}
-          aria-label="View"
-        >
-          <VisibilityIcon />
-        </IconButton>
+        <Tooltip title="View">
+          <IconButton
+            sx={{
+              borderRadius: "20px",
+              fontSize: "30px",
+            }}
+            aria-label="View"
+          >
+            <VisibilityIcon />
+          </IconButton>
+        </Tooltip>
 
-        <IconButton
-          onClick={onCommentButtonClick} // Trigger comment mode
-          sx={{
-            borderRadius: "20px",
-            fontSize: "30px",
-            color: isCommenting ? "#ff5722" : "#9c27b0", // Change color based on isCommenting
-          }}
-          aria-label="Comment"
-        >
-          <AddCommentIcon />
-        </IconButton>
+        <Tooltip title="Add Comment">
+          {" "}
+          {/* Add Tooltip here */}
+          <IconButton
+            onClick={onCommentButtonClick} // Trigger comment mode
+            sx={{
+              borderRadius: "20px",
+              fontSize: "30px",
+              color: isCommenting ? "#ff5722" : "#9c27b0", // Change color based on isCommenting
+            }}
+            aria-label="Comment"
+          >
+            <AddCommentIcon />
+          </IconButton>
+        </Tooltip>
 
         <Button
           onClick={handleFinalizeClick}

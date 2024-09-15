@@ -120,6 +120,7 @@ function ImgSection({
         alt="Design Proposal"
         onClick={handleImageClick}
         style={styles.image}
+        draggable="false"
       />
       {/* Render comment bubbles for each coordinate */}
       {clickCoordinates.map((coord, index) => (
