@@ -8,6 +8,7 @@ import CommentInput from "./CommentInput";
 import ReactAudioPlayer from "react-audio-player";
 // Component for handling user input, including text comments and file uploads
 function ImgSection({
+  isViewActive,
   isCommenting,
   activeCommentIndex,
   setActiveCommentIndex,
@@ -122,113 +123,114 @@ function ImgSection({
         style={styles.image}
         draggable="false"
       />
-      {/* Render comment bubbles for each coordinate */}
-      {clickCoordinates.map((coord, index) => (
-        <Box
-          key={index}
-          sx={styles.commentBubbleStyles(
-            `${coord.y - 30}px`, //correction to make arrow tip match with the click
-            `${coord.x + 30}px`, //correction to make arrow tip match with the click
-            activeCommentIndex,
-            index
-          )}
-        >
-          {" "}
-          {/* Avatar for the comment bubble */}
-          <Avatar
-            src={coord.image}
-            sx={styles.avatar}
-            alt="User Avatar"
-            onClick={() => handleAvatarClick(index)}
-          />
-          {/* Display comment box if the current bubble is active */}
-          {activeCommentIndex === index && (
-            <Box sx={styles.boxCommentsOne}>
-              <Box sx={styles.boxCommentsTwo}>
-                <Box sx={styles.closeIconAndName}>
-                  <Box sx={styles.userName}>
-                    <Typography>{coord.userName}</Typography>
-                  </Box>{" "}
-                  {/* Close button to hide the comment box */}
-                  <IconButton
-                    size="small"
-                    onClick={handleCloseCommentBox}
-                    sx={{ color: "white", marginRight: 2 }}
-                  >
-                    <CloseIcon fontSize="small" />
-                  </IconButton>
+      {/* Render comment bubbles for each coordinate if isViewActive is false */}
+      {!isViewActive && // check
+        clickCoordinates.map((coord, index) => (
+          <Box
+            key={index}
+            sx={styles.commentBubbleStyles(
+              `${coord.y - 30}px`, //correction to make arrow tip match with the click
+              `${coord.x + 30}px`, //correction to make arrow tip match with the click
+              activeCommentIndex,
+              index
+            )}
+          >
+            {" "}
+            {/* Avatar for the comment bubble */}
+            <Avatar
+              src={coord.image}
+              sx={styles.avatar}
+              alt="User Avatar"
+              onClick={() => handleAvatarClick(index)}
+            />
+            {/* Display comment box if the current bubble is active */}
+            {activeCommentIndex === index && (
+              <Box sx={styles.boxCommentsOne}>
+                <Box sx={styles.boxCommentsTwo}>
+                  <Box sx={styles.closeIconAndName}>
+                    <Box sx={styles.userName}>
+                      <Typography>{coord.userName}</Typography>
+                    </Box>{" "}
+                    {/* Close button to hide the comment box */}
+                    <IconButton
+                      size="small"
+                      onClick={handleCloseCommentBox}
+                      sx={{ color: "white", marginRight: 2 }}
+                    >
+                      <CloseIcon fontSize="small" />
+                    </IconButton>
+                  </Box>
+
+                  <Divider sx={styles.divider} />
                 </Box>
 
-                <Divider sx={styles.divider} />
-              </Box>
-
-              <Box sx={styles.commentScroll}>
-                {/* Render existing comments */}
-                {coord.comments.map((comment, i) => {
-                  const hasImage = comment.attachImg;
-                  const hasAudio = comment.audioUrl;
-                  return (
-                    <Box
-                      key={i}
-                      sx={{
-                        color: "rgba(255, 255, 255, 0.877)",
-                        marginBottom: "8px",
-                      }}
-                    >
-                      <Box>
-                        <Typography sx={{ fontSize: 14 }}>
-                          {comment.comment}
-                        </Typography>
-                      </Box>
-                      {hasImage && (
-                        <img
-                          src={comment.attachImg}
-                          alt="Attached"
-                          style={{
-                            width: "100px",
-                            height: "100px",
-                            objectFit: "cover",
-                            marginTop: "8px",
-                          }}
-                        />
-                      )}
-
-                      {hasAudio && (
-                        <Box
-                          sx={{
-                            width: "90%",
-                            marginTop: "8px",
-                            borderRadius: "4px",
-                            padding: "8px",
-                            border: "none",
-                          }}
-                        >
-                          <ReactAudioPlayer
-                            src={comment.audioUrl}
-                            controls
-                            className="custom-audio-player"
-                          />
+                <Box sx={styles.commentScroll}>
+                  {/* Render existing comments */}
+                  {coord.comments.map((comment, i) => {
+                    const hasImage = comment.attachImg;
+                    const hasAudio = comment.audioUrl;
+                    return (
+                      <Box
+                        key={i}
+                        sx={{
+                          color: "rgba(255, 255, 255, 0.877)",
+                          marginBottom: "8px",
+                        }}
+                      >
+                        <Box>
+                          <Typography sx={{ fontSize: 14 }}>
+                            {comment.comment}
+                          </Typography>
                         </Box>
-                      )}
-                    </Box>
-                  );
-                })}
+                        {hasImage && (
+                          <img
+                            src={comment.attachImg}
+                            alt="Attached"
+                            style={{
+                              width: "100px",
+                              height: "100px",
+                              objectFit: "cover",
+                              marginTop: "8px",
+                            }}
+                          />
+                        )}
+
+                        {hasAudio && (
+                          <Box
+                            sx={{
+                              width: "90%",
+                              marginTop: "8px",
+                              borderRadius: "4px",
+                              padding: "8px",
+                              border: "none",
+                            }}
+                          >
+                            <ReactAudioPlayer
+                              src={comment.audioUrl}
+                              controls
+                              className="custom-audio-player"
+                            />
+                          </Box>
+                        )}
+                      </Box>
+                    );
+                  })}
+                </Box>
+                {/* Component for adding a new comment */}
+                <CommentInput
+                  newComment={newComment}
+                  setNewComment={setNewComment}
+                  handleAudioUpload={handleAudioUpload}
+                  handleImageUpload={handleImageUpload}
+                  handleCommentSubmit={handleCommentSubmit}
+                  index={index}
+                  getTextFieldLabel={getTextFieldLabel}
+                  styles={styles}
+                />
               </Box>
-              {/* Component for adding a new comment */}
-              <CommentInput
-                newComment={newComment}
-                setNewComment={setNewComment}
-                handleAudioUpload={handleAudioUpload}
-                handleImageUpload={handleImageUpload}
-                handleCommentSubmit={handleCommentSubmit}
-                index={index}
-                getTextFieldLabel={getTextFieldLabel}
-                styles={styles}
-              />
-            </Box>
-          )}
-        </Box>
-      ))}
+            )}
+          </Box>
+        ))}
     </Box>
   );
 }

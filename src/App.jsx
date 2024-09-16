@@ -7,7 +7,6 @@ import { exampleCoordinates } from "./Components/Examples/ExamplesData";
 
 function App() {
   const [clickCoordinates, setClickCoordinates] = useState(exampleCoordinates);
-  console.log(clickCoordinates);
   return (
     <>
       <Container maxWidth={false} disableGutters sx={{ padding: 0 }}>

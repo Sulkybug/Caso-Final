@@ -5,6 +5,7 @@ import ImgSection from "./ImgSection/ImgSection";
 import ControlsSection from "./ControlsSection";
 
 function DesignProposal({ clickCoordinates, setClickCoordinates }) {
+  const [isViewActive, setView] = useState(false);
   const [isCommenting, setIsComenting] = useState(false);
   const [activeCommentIndex, setActiveCommentIndex] = useState(null);
 
@@ -18,6 +19,10 @@ function DesignProposal({ clickCoordinates, setClickCoordinates }) {
 
   const handleSetActiveCommentIndex = (index) => {
     setActiveCommentIndex(index); // Set the index of the active comment box
+  };
+
+  const handleViewButtonCLick = () => {
+    isViewActive === false ? setView(true) : setView(false); // to disable or enable comments view on the img
   };
 
   return (
@@ -35,6 +40,7 @@ function DesignProposal({ clickCoordinates, setClickCoordinates }) {
     >
       <NameSection />
       <ImgSection
+        isViewActive={isViewActive}
         isCommenting={isCommenting}
         activeCommentIndex={activeCommentIndex}
         setActiveCommentIndex={handleSetActiveCommentIndex}
@@ -43,9 +49,10 @@ function DesignProposal({ clickCoordinates, setClickCoordinates }) {
         setClickCoordinates={setClickCoordinates}
       />
       <ControlsSection
+        isViewActive={isViewActive}
+        onViewButton={handleViewButtonCLick}
         isCommenting={isCommenting}
         onCommentButtonClick={handleCommentButtonClick}
-        onDeactivateCommenting={handleDeactivateCommenting}
       />
     </Box>
   );

@@ -5,14 +5,19 @@ import {
   Button,
   Slider,
   IconButton,
-  Tooltip, // Import Tooltip
+  Tooltip,
   Dialog,
   DialogContent,
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 
-function ControlsSection({ onCommentButtonClick, isCommenting }) {
+function ControlsSection({
+  onCommentButtonClick,
+  isCommenting,
+  isViewActive,
+  onViewButton,
+}) {
   const [zoom, setZoom] = React.useState(50);
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
@@ -127,11 +132,13 @@ function ControlsSection({ onCommentButtonClick, isCommenting }) {
           width: "40%",
         }}
       >
-        <Tooltip title="View">
+        <Tooltip title={isViewActive ? "View Comments" : "Hide Comments"}>
           <IconButton
+            onClick={onViewButton} // Trigger view mode
             sx={{
               borderRadius: "20px",
               fontSize: "30px",
+              color: isViewActive ? "black" : "#9c27b0", // Change color based on isViewActive
             }}
             aria-label="View"
           >
@@ -140,8 +147,6 @@ function ControlsSection({ onCommentButtonClick, isCommenting }) {
         </Tooltip>
 
         <Tooltip title="Add Comment">
-          {" "}
-          {/* Add Tooltip here */}
           <IconButton
             onClick={onCommentButtonClick} // Trigger comment mode
             sx={{
