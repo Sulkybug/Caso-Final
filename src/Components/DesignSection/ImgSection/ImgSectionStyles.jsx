@@ -27,7 +27,7 @@ export const styles = {
       backgroundColor: "rgba(32, 32, 32, 0.74)",
       borderRadius:
         activeCommentIndex === index
-          ? "10px 10px 10px 0px" // All corners except bottom-left
+          ? "15px 15px 15px 0px" // All corners except bottom-left
           : "50% 50% 50% 0", // Fully rounded for the bubble
       transform: "translate(-50%, -50%)",
       display: "flex",

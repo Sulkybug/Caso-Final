@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import proposal from "../../../assets/img/proposal.jpg";
+import proposal from "../../../assets/img/Proposal.jpeg";
 import avatarImg from "../../../assets/img/avatarOne.png";
 import { Box, Avatar, IconButton, Divider, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -176,7 +176,7 @@ function ImgSection({
                       }}
                     >
                       <Box>
-                        <Typography sx={{ fontSize: 15 }}>
+                        <Typography sx={{ fontSize: 14 }}>
                           {comment.comment}
                         </Typography>
                       </Box>

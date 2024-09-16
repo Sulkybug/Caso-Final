@@ -24,10 +24,7 @@ function App() {
             clickCoordinates={clickCoordinates}
             setClickCoordinates={setClickCoordinates}
           />
-          <Comments
-            commentData={clickCoordinates}
-            setClickCoordinates={setClickCoordinates}
-          />
+          <Comments commentData={clickCoordinates} />
         </Box>
       </Container>
     </>
